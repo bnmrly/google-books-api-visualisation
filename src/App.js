@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import BookList from './components/BookList';
 
 class App extends Component {
   state = {
@@ -14,8 +15,6 @@ class App extends Component {
       } = await axios.get(
         'https://www.googleapis.com/books/v1/volumes?q=inauthor:jg%20ballard&maxResults=40'
       );
-
-      console.log(items);
       this.setState({
         books: items
       });
@@ -32,7 +31,7 @@ class App extends Component {
         </header>
         <section className="books-container">
           <h1>JG Ballard Books</h1>
-          books go here
+          <BookList books={this.state.books} />
         </section>
         <section className="data-visualisation-container">
           <div className="buttons-container">
