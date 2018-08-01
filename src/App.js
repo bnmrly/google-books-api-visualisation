@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App-container">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Google Books Data App</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <section className="books-container">
+          <h1>JG Ballard Books</h1>
+          books go here
+        </section>
+        <section className="data-visualisation-container">
+          <div class="buttons-container">
+            <button>1</button>
+            <button>2</button>
+          </div>
+          <div className="chart-container">Data visualisation goes here</div>
+        </section>
       </div>
     );
   }
