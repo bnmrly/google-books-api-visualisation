@@ -39,6 +39,8 @@ class App extends Component {
 
     const publicationYears = Array.from(new Set(allYears));
 
+    // creates a tally object of the books in a year
+
     const bookTally = allYears.reduce((acc, el) => {
       acc[el] ? acc[el]++ : (acc[el] = 1);
       return acc;
@@ -48,11 +50,47 @@ class App extends Component {
 
     const booksPerYear = Object.values(bookTally);
 
-    const pieData = {
+    const yearData = {
       labels: publicationYears,
       datasets: [
         {
           data: booksPerYear,
+          backgroundColor: cssColorNames,
+          hoverBackgroundColor: cssColorNames
+        }
+      ]
+    };
+
+    // returns array of all page counts, sorted chronologically
+
+    const sortPageAsc = (a, b) => {
+      return a - b;
+    };
+
+    const allPageCounts = books
+      .map(book => book.volumeInfo.pageCount)
+      .sort(sortPageAsc);
+
+    // returns array of the unique page counts
+
+    const uniquePageCounts = Array.from(new Set(allPageCounts));
+
+    // creates a tally object of all the pageCounts
+
+    const pageCountTally = allPageCounts.reduce((acc, el) => {
+      acc[el] ? acc[el]++ : (acc[el] = 1);
+      return acc;
+    }, {});
+
+    // creates array of values from the tally object
+
+    const numbersOfPageCounts = Object.values(pageCountTally);
+
+    const PageCountData = {
+      labels: uniquePageCounts,
+      datasets: [
+        {
+          data: numbersOfPageCounts,
           backgroundColor: cssColorNames,
           hoverBackgroundColor: cssColorNames
         }
@@ -71,17 +109,30 @@ class App extends Component {
         <section className="data-visualisation-container">
           <div className="data-pie" />
           <div className="buttons-container">
-            <button className="button">1</button>
-            <button className="button">2</button>
+            <button onClick={this.handleClick} value="year" className="button">
+              Year
+            </button>
+            <button
+              onClick={this.handleClick}
+              value="pageCount"
+              className="button"
+            >
+              Page Count
+            </button>
           </div>
           <div className="chart-container">
-            Data visualisation goes here
-            <Pie data={pieData} />
+            {/* <Pie data={yearData} /> */}
+            <Pie data={PageCountData} />
           </div>
         </section>
       </div>
     );
   }
+
+  handleClick = event => {
+    console.dir(event.target.value);
+    // console.log('this has been clicked!');
+  };
 }
 
 export default App;
