@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as api from './Api';
+import axios from 'axios';
 
 class App extends Component {
-  componentDidMount = () => {
-    api.getBooks();
-    console.log('this is the data being called in componentDidMount');
+  state = {
+    books: []
   };
+
+  componentDidMount = async () => {
+    try {
+      const {
+        data: { items }
+      } = await axios.get(
+        'https://www.googleapis.com/books/v1/volumes?q=inauthor:jg%20ballard&maxResults=40'
+      );
+
+      console.log(items);
+      this.setState({
+        books: items
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     return (
       <div className="App-container">
