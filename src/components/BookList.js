@@ -3,7 +3,6 @@ import { generate as generateId } from 'shortid';
 import moment from 'moment';
 
 const BookList = ({ books }) => {
-  console.log(books, 'this is books');
   return (
     <div className="all-books">
       {books.map(book => {
