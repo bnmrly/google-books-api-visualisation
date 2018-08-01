@@ -8,6 +8,12 @@
   background-color: rgb(116, 212, 206);
 }
 
+.all-books {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  grid-column-gap: 1rem;
+}
+
 .books-container {
   background-color: rgb(218, 131, 206);
 }
