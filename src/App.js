@@ -14,8 +14,8 @@ class App extends Component {
         </section>
         <section className="data-visualisation-container">
           <div class="buttons-container">
-            <button>1</button>
-            <button>2</button>
+            <button className="button">1</button>
+            <button className="button">2</button>
           </div>
           <div className="chart-container">Data visualisation goes here</div>
         </section>

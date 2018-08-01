@@ -15,3 +15,7 @@
 .data-visualisation-container {
   background-color: rgb(151, 218, 131);
 }
+
+.button {
+  width: 5rem;
+}
