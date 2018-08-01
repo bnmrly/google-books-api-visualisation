@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import BookList from './components/BookList';
 import { Pie } from 'react-chartjs-2';
+import moment from 'moment';
 
 class App extends Component {
   state = {
@@ -25,8 +26,15 @@ class App extends Component {
   };
 
   render() {
+    const { books } = this.state;
+    const publicationYears = Array.from(
+      new Set(
+        books.map(book => moment(book.volumeInfo.publishedDate).format('YYYY'))
+      )
+    );
+
     const pieData = {
-      labels: ['Red', 'Green', 'Yellow'],
+      labels: publicationYears,
       datasets: [
         {
           data: [300, 50, 100],
@@ -35,6 +43,7 @@ class App extends Component {
         }
       ]
     };
+
     return (
       <div className="App-container">
         <header className="App-header">
@@ -45,9 +54,7 @@ class App extends Component {
           <BookList books={this.state.books} />
         </section>
         <section className="data-visualisation-container">
-          <div className="data-pie">
-            <h1> where is pie?</h1>
-          </div>
+          <div className="data-pie" />
           <div className="buttons-container">
             <button className="button">1</button>
             <button className="button">2</button>
