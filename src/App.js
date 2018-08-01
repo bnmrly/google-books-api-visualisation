@@ -4,6 +4,7 @@ import axios from 'axios';
 import BookList from './components/BookList';
 import { Pie } from 'react-chartjs-2';
 import moment from 'moment';
+import cssColorNames from './utils/cssColorNames';
 
 class App extends Component {
   state = {
@@ -27,19 +28,30 @@ class App extends Component {
 
   render() {
     const { books } = this.state;
-    const publicationYears = Array.from(
-      new Set(
-        books.map(book => moment(book.volumeInfo.publishedDate).format('YYYY'))
-      )
-    );
+
+    const allYears = books
+      .map(book => moment(book.volumeInfo.publishedDate).format('YYYY'))
+      .sort();
+
+    const publicationYears = Array.from(new Set(allYears));
+
+    const bookTally = array => {
+      const reduced = array.reduce((acc, el) => {
+        acc[el] ? acc[el]++ : (acc[el] = 1);
+        return acc;
+      }, {});
+      return Object.values(reduced);
+    };
+
+    const booksPerYear = bookTally(allYears);
 
     const pieData = {
       labels: publicationYears,
       datasets: [
         {
-          data: [300, 50, 100],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+          data: booksPerYear,
+          backgroundColor: cssColorNames,
+          hoverBackgroundColor: cssColorNames
         }
       ]
     };
