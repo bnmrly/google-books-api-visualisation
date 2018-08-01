@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
+import * as api from './Api';
 
 class App extends Component {
+  componentDidMount = () => {
+    api.getBooks();
+    console.log('this is the data being called in componentDidMount');
+  };
   render() {
     return (
       <div className="App-container">
@@ -13,7 +18,7 @@ class App extends Component {
           books go here
         </section>
         <section className="data-visualisation-container">
-          <div class="buttons-container">
+          <div className="buttons-container">
             <button className="button">1</button>
             <button className="button">2</button>
           </div>
