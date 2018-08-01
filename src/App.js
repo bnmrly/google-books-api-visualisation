@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import BookList from './components/BookList';
+import { Pie } from 'react-chartjs-2';
 
 class App extends Component {
   state = {
@@ -24,6 +25,16 @@ class App extends Component {
   };
 
   render() {
+    const pieData = {
+      labels: ['Red', 'Green', 'Yellow'],
+      datasets: [
+        {
+          data: [300, 50, 100],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }
+      ]
+    };
     return (
       <div className="App-container">
         <header className="App-header">
@@ -34,11 +45,17 @@ class App extends Component {
           <BookList books={this.state.books} />
         </section>
         <section className="data-visualisation-container">
+          <div className="data-pie">
+            <h1> where is pie?</h1>
+          </div>
           <div className="buttons-container">
             <button className="button">1</button>
             <button className="button">2</button>
           </div>
-          <div className="chart-container">Data visualisation goes here</div>
+          <div className="chart-container">
+            Data visualisation goes here
+            <Pie data={pieData} />
+          </div>
         </section>
       </div>
     );
