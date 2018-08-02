@@ -8,7 +8,9 @@ import cssColorNames from './utils/cssColorNames';
 
 class App extends Component {
   state = {
-    books: []
+    books: [],
+    chartTitle: '',
+    chartDataType: {}
   };
 
   componentDidMount = async () => {
@@ -27,6 +29,38 @@ class App extends Component {
   };
 
   render() {
+    return (
+      <div className="App-container">
+        <header className="App-header">
+          <h1 className="App-title">Google Books Api Data Visualisation</h1>
+        </header>
+        <section className="books-container">
+          <h1>JG Ballard Books</h1>
+          <BookList books={this.state.books} />
+        </section>
+        <section className="data-visualisation-container">
+          <div className="data-pie" />
+          <div className="buttons-container">
+            <button onClick={this.getYearData} className="button">
+              Year
+            </button>
+            <button
+              onClick={this.getPageCountData}
+              value="pageCount"
+              className="button"
+            >
+              Page Count
+            </button>
+          </div>
+          <div className="chart-container">
+            <h1> {this.state.chartTitle}</h1>
+            <Pie data={this.state.chartDataType} />
+          </div>
+        </section>
+      </div>
+    );
+  }
+  getYearData = () => {
     const { books } = this.state;
 
     // returns array of all publication years, sorted chronologically
@@ -61,6 +95,15 @@ class App extends Component {
       ]
     };
 
+    this.setState({
+      chartTitle: 'Books Per Year',
+      chartDataType: yearData
+    });
+  };
+
+  getPageCountData = () => {
+    const { books } = this.state;
+
     // returns array of all page counts, sorted chronologically
 
     const sortPageAsc = (a, b) => {
@@ -86,7 +129,7 @@ class App extends Component {
 
     const numbersOfPageCounts = Object.values(pageCountTally);
 
-    const PageCountData = {
+    const pageCountData = {
       labels: uniquePageCounts,
       datasets: [
         {
@@ -97,41 +140,10 @@ class App extends Component {
       ]
     };
 
-    return (
-      <div className="App-container">
-        <header className="App-header">
-          <h1 className="App-title">Google Books Data App</h1>
-        </header>
-        <section className="books-container">
-          <h1>JG Ballard Books</h1>
-          <BookList books={this.state.books} />
-        </section>
-        <section className="data-visualisation-container">
-          <div className="data-pie" />
-          <div className="buttons-container">
-            <button onClick={this.handleClick} value="year" className="button">
-              Year
-            </button>
-            <button
-              onClick={this.handleClick}
-              value="pageCount"
-              className="button"
-            >
-              Page Count
-            </button>
-          </div>
-          <div className="chart-container">
-            {/* <Pie data={yearData} /> */}
-            <Pie data={PageCountData} />
-          </div>
-        </section>
-      </div>
-    );
-  }
-
-  handleClick = event => {
-    console.dir(event.target.value);
-    // console.log('this has been clicked!');
+    this.setState({
+      chartTitle: 'Page count per Book',
+      chartDataType: pageCountData
+    });
   };
 }
 
