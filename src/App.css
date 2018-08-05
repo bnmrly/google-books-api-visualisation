@@ -2,24 +2,41 @@
   height: 100vh;
   display: grid;
   grid-template-rows: 10vh auto;
-}
-
-.App-header {
-  background-color: rgb(116, 212, 206);
+  background-color: rgb(220, 220, 220);
 }
 
 .all-books {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-columns: repeat(auto-fill, 10rem);
   grid-column-gap: 1rem;
+  width: 96%;
+  margin-left: 2%;
 }
 
 .books-container {
-  background-color: rgb(218, 131, 206);
+  background-color: rgb(220, 220, 220);
 }
 
 .data-visualisation-container {
-  background-color: rgb(151, 218, 131);
+  background-color: lightgray;
+}
+
+.buttons-container {
+  text-align: center;
+}
+
+.button {
+  margin-right: 1rem;
+  width: 8rem;
+}
+
+.button--last {
+  margin-right: 0rem;
+}
+
+.book-info {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .image-thumbnail,
