@@ -51,6 +51,13 @@ class App extends Component {
             >
               Page Count
             </button>
+            <button
+              onClick={this.getCategories}
+              value="pageCount"
+              className="button"
+            >
+              Other Data
+            </button>
           </div>
           <div className="chart-container">
             <h1> {this.state.chartTitle}</h1>
@@ -60,6 +67,7 @@ class App extends Component {
       </div>
     );
   }
+
   getYearData = () => {
     const { books } = this.state;
 
@@ -118,6 +126,8 @@ class App extends Component {
 
     const uniquePageCounts = Array.from(new Set(allPageCounts));
 
+    console.log(uniquePageCounts);
+
     // creates a tally object of all the pageCounts
 
     const pageCountTally = allPageCounts.reduce((acc, el) => {
@@ -143,6 +153,51 @@ class App extends Component {
     this.setState({
       chartTitle: 'Page count per Book',
       chartDataType: pageCountData
+    });
+  };
+
+  getCategories = () => {
+    const { books } = this.state;
+
+    // returns array of all categories
+
+    const allCategories = books
+      .map(book => {
+        return book.volumeInfo.categories;
+      })
+      .sort();
+
+    // console.log(allCategories);
+
+    // returns array of the unique categories
+
+    const uniqueCategories = Array.from(new Set([].concat(...allCategories)));
+
+    // creates a tally object of all the categories
+
+    const categoryTally = allCategories.reduce((acc, el) => {
+      acc[el] ? acc[el]++ : (acc[el] = 1);
+      return acc;
+    }, {});
+
+    // creates array of values from the tally object
+
+    const numbersOfCategories = Object.values(categoryTally);
+
+    const categoryData = {
+      labels: uniqueCategories,
+      datasets: [
+        {
+          data: numbersOfCategories,
+          backgroundColor: cssColorNames,
+          hoverBackgroundColor: cssColorNames
+        }
+      ]
+    };
+
+    this.setState({
+      chartTitle: 'Book categories',
+      chartDataType: categoryData
     });
   };
 }
