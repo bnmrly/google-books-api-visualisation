@@ -126,8 +126,6 @@ class App extends Component {
 
     const uniquePageCounts = Array.from(new Set(allPageCounts));
 
-    console.log(uniquePageCounts);
-
     // creates a tally object of all the pageCounts
 
     const pageCountTally = allPageCounts.reduce((acc, el) => {
@@ -166,8 +164,6 @@ class App extends Component {
         return book.volumeInfo.categories;
       })
       .sort();
-
-    // console.log(allCategories);
 
     // returns array of the unique categories
 
