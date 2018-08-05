@@ -105,7 +105,7 @@ class App extends Component {
     };
 
     this.setState({
-      chartTitle: 'Books per Year',
+      chartTitle: 'Books per Publication Year',
       chartDataType: yearData
     });
   };
