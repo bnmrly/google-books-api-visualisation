@@ -3,7 +3,6 @@ import './App.css';
 import axios from 'axios';
 import BookList from './components/BookList';
 import { Pie } from 'react-chartjs-2';
-import moment from 'moment';
 import cssColorNames from './utils/cssColorNames';
 
 class App extends Component {
@@ -74,7 +73,9 @@ class App extends Component {
     // returns array of all publication years, sorted chronologically
 
     const allYears = books
-      .map(book => moment(book.volumeInfo.publishedDate).format('YYYY'))
+      .map(book => {
+        return book.volumeInfo.publishedDate.slice(0, 4);
+      })
       .sort();
 
     // returns array of the unique publication years

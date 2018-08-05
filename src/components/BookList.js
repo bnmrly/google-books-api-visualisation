@@ -1,6 +1,5 @@
 import React from 'react';
 import { generate as generateId } from 'shortid';
-import moment from 'moment';
 
 const BookList = ({ books }) => {
   return (
@@ -15,7 +14,7 @@ const BookList = ({ books }) => {
               <h5>No image available</h5>
             )}
             <p>Title: {title}</p>
-            <p>Published date: {moment(publishedDate).format('YYYY')}</p>
+            <p>Published date: {publishedDate.slice(0, 4)}</p>
             <p>Pagecount: {pageCount}</p>
           </div>
         );
