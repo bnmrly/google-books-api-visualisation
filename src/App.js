@@ -31,14 +31,14 @@ class App extends Component {
     return (
       <div className="App-container">
         <header className="App-header">
-          <h1 className="App-title">Google Books Api Data Visualisation</h1>
+          <h1 className="App-title h1">Google Books Api Data Visualisation</h1>
         </header>
         <section className="books-container">
-          <h1>JG Ballard Books</h1>
+          <h1 className="h1">JG Ballard Books</h1>
           <BookList books={this.state.books} />
         </section>
         <section className="data-visualisation-container">
-          <div className="data-pie" />
+          <h1 className="h1">Data view</h1>
           <div className="buttons-container">
             <button onClick={this.getYearData} className="button">
               Year
@@ -53,13 +53,13 @@ class App extends Component {
             <button
               onClick={this.getCategories}
               value="pageCount"
-              className="button"
+              className="button button--last"
             >
               Other Data
             </button>
           </div>
           <div className="chart-container">
-            <h1> {this.state.chartTitle}</h1>
+            <h2 className="h2"> {this.state.chartTitle}</h2>
             <Pie data={this.state.chartDataType} />
           </div>
         </section>
@@ -105,7 +105,7 @@ class App extends Component {
     };
 
     this.setState({
-      chartTitle: 'Books Per Year',
+      chartTitle: 'Books per Year',
       chartDataType: yearData
     });
   };
@@ -193,7 +193,7 @@ class App extends Component {
     };
 
     this.setState({
-      chartTitle: 'Book categories',
+      chartTitle: 'Book Categories',
       chartDataType: categoryData
     });
   };
